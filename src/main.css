@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-os-bg: #e4d8ce;
+  --color-os-window: #ebe8eb;
+  --color-os-panel: #dadada;
+  --color-os-accent: #c2652a;
+  --color-os-border-light: #ffffef;
+  --color-os-border-dark: #616161;
+  --color-os-text: #111111;
+
+  /* Backgrounds */
+  --background-image-graph-paper: linear-gradient(#61616133 1px, transparent 0);
+
+  /* Fonts */
+  --font-serif: "EB Garamond", serif;
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: monospace;
+
+  /* Spacing overrides */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-40: 40px;
+  --spacing-80: 80px;
+}
+
+/* custom OS utilities */
+@layer utilities {
+  .os-bevel-out {
+    border-top: 1px solid #ffffef;
+    border-left: 1px solid #ffffef;
+    border-bottom: 1px solid #616161;
+    border-right: 1px solid #616161;
+  }
+
+  .os-bevel-in {
+    border-top: 1px solid #616161;
+    border-left: 1px solid #616161;
+    border-bottom: 1px solid #ffffef;
+    border-right: 1px solid #ffffef;
+  }
+
+  .os-window-shadow {
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .os-grid-bg {
+    background-image:
+      linear-gradient(to right, #6161611a 1px, transparent 1px),
+      linear-gradient(to bottom, #6161611a 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
