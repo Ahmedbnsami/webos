@@ -1,37 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Settings } from "./components/Settings";
+import { Terminal } from "./components/Terminal";
 import { Desktop } from "./components/Desktop";
 import { TaskBar } from "./components/TaskBar";
 import { Window } from "./components/Window";
 
 // Stateful, persistent Notes Application
 const NotesAppContent = () => {
-  const [categories, setCategories] = useState(() => {
-    const saved = localStorage.getItem("webos_notes_categories");
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem("webos_notes_data");
-    return saved ? JSON.parse(saved) : {};
-  });
-
-  const [activeCategory, setActiveCategory] = useState(() => {
-    const saved = localStorage.getItem("webos_notes_categories");
-    const parsed = saved ? JSON.parse(saved) : [];
-    return parsed.length > 0 ? parsed[0] : "";
-  });
+  const [categories, setCategories] = useState([]);
+  const [notes, setNotes] = useState({});
+  const [activeCategory, setActiveCategory] = useState("");
 
   const [lastEdited, setLastEdited] = useState("Just now");
 
-  // Save categories to localStorage
-  useEffect(() => {
-    localStorage.setItem("webos_notes_categories", JSON.stringify(categories));
-  }, [categories]);
 
-  // Save notes data to localStorage
-  useEffect(() => {
-    localStorage.setItem("webos_notes_data", JSON.stringify(notes));
-  }, [notes]);
 
   const handleTextChange = (e) => {
     const text = e.target.value;
@@ -242,8 +224,14 @@ function App() {
           {/* Notes App View */}
           {win.id === "notes" && <NotesAppContent />}
 
+          {/* Terminal View */}
+          {win.id === "terminal" && <Terminal />}
+
+          {/* Settings View */}
+          {win.id === "settings" && <Settings />}
+
           {/* Simple mock views for other programs */}
-          {win.id !== "notes" && (
+          {win.id !== "notes" && win.id !== "terminal" && win.id !== "settings" && (
             <div className="p-16 text-xs text-os-text font-mono">
               <p className="font-bold mb-4 uppercase">{win.title} Area</p>
               <p className="text-os-border-dark">This application is under construction.</p>
